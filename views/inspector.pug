@@ -1,0 +1,98 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="css/font-awesome.min.css")
+        link(rel="stylesheet", href="css/bootstrap.min.css")
+        link(rel="stylesheet", href=`css/main.css`)
+        script(src="js/jquery.js")
+        title Inspector page
+    body
+        .wrapper
+            .my-navbar
+                a(href="/" class="active") Home
+                a(href="https://stat.uz/uz/") Stat.uz
+                //- a(href="#") Link
+                a(href="/" class="right") Login
+            .my-row
+                .main 
+                    h2 XODIMNING KUNLIK BAJARGAN ISHLARI
+                    br
+                    form(id="form-login")
+                        .form-group
+                            table.table.table-bordered
+                                thead 
+                                    tr 
+                                        th INN
+                                        th Sana
+                                        th Boshqarma kodi
+                                        th Bo'lim kodi
+                                        th Izlash
+                                tbody 
+                                    tr 
+                                        td 
+                                            input(type="text" id="start1" value="" class="form-control" name="inn")
+                                        td 
+                                            input(type="date" id="dayinput" class="form-control" name="dayinput")
+                                        td
+                                            input(type="text" id="start1" value="" class="form-control" name="management")
+                                        td  
+                                            input(type="text" id="start2" value="" class="form-control" name="section")
+                                        td 
+                                            input(type="submit" class="btn btn-default btn-submit" value="Izlash")
+                    table.table.table-bordered
+                        thead 
+                            tr 
+                                th FISH
+                                th Boshqarma
+                                th Bo'lim
+                                th Unvoni
+                                th Sana
+                        tbody(class="employee-table")
+                            //- tr 
+                            //-     td 
+                            //-         a(href="/") Ochilov Shohro'zbek Shohsuvor o'g'li
+                            //-     td Axborot tizimlarini rivojlantirish va joriy etish
+                            //-     td Axborot tizimlarini rivojlantirish va joriy etish
+                            //-     td Yetakchi muhandis dasturchi
+                            //-     td= new Date()
+                    script.
+                        var request;
+                        $('#start').value = new Date();
+                        $('#end').value = new Date();
+                        $("#form-login").submit(function(event){
+                            event.preventDefault();
+                            if (request) {
+                                request.abort();
+                            }
+                            var $form = $(this);
+                            var $inputs = $form.find("input, select, button, textarea");
+                            var serializedData = $form.serialize();
+                            $inputs.prop("disabled", true);
+                            request = $.ajax({
+                                url: "/employee/search_worker?" + serializedData,
+                                type: "post",
+                                data: serializedData
+                            });
+                            request.done(function (response, textStatus, jqXHR){
+                                let users = [];
+                                let date = (response.javob.date != "")?response.javob.date:new Date();
+                                let dateText = new Date(date).getUTCDate() + "/" + (new Date(date).getUTCMonth() + 1) + "/" + new Date(date).getUTCFullYear();
+                                $('.employee-table').html('');
+                                tableBodyEmployee($('.employee-table'),response.javob.user,dateText,date);
+                            });
+                            request.fail(function (jqXHR, textStatus, errorThrown){
+                                console.error(
+                                    "The following error occurred: "+
+                                    textStatus, errorThrown
+                                );
+                            });
+                            request.always(function () {
+                                $inputs.prop("disabled", false);
+                            });
+
+                        });
+                    br
+                    script(src="js/main.js")
