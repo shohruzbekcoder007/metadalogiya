@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const adminRouter = require('./src/admin');
+var compression = require('compression');
+const helmet = require("helmet");
 
 const app = express();
 app.use(express.static('./static'));
@@ -21,6 +23,8 @@ const routers = require('./src/router');
 
 app.use('/', routers);
 app.use('/admin',  adminRouter);
+app.use(compression());
+app.use(helmet());
 
 app.listen(port, ()=> {
   console.log(`Application is up and running under localhost:${port}/admin`)
