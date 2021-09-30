@@ -1,0 +1,195 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="css/font-awesome.min.css")
+        link(rel="stylesheet", href="css/bootstrap.min.css")
+        link(rel="stylesheet", href=`css/main.css`)
+        script(src="js/jquery.js")
+        script(src="js/bootstrap.min.js")
+        script(src="js/popper.min.js")
+        title Employee page
+    body
+        .wrapper
+            mixin worked(elem)
+                tr 
+                    th= elem.work_text
+                    case elem.work_type
+                        when "1"
+                            th Tayyorgarlik va yakuniy
+                        when "2"
+                            th Ish joyiga xizmat ko'rsatish
+                        when "3"
+                            th Statistik ishlarning bajarilishi
+                        when "4"
+                            th Reglamentlangan tanafus
+                        when "5"
+                            th Qisqa tanafus
+                        when "6"
+                            th Boshqa funksialar
+                        default
+                            th salom
+                    th= new Date(elem.start_date).getHours() + ":" + new Date(elem.start_date).getMinutes()
+                    th= new Date(elem.finish_date).getHours() + ":" + new Date(elem.finish_date).getMinutes()
+                    th= elem.duration
+                    th= elem.work_code
+                    th
+                        button(type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" + elem._id) O'zgartirish
+                        div(class="modal fade" id="exampleModal" + elem._id tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                            div(class="modal-dialog modal-dialog-centered" role="document")
+                                div(class="modal-content")
+                                    //- form(id="form-edit"+elem._id data_id1=`${elem._id}sh`)
+                                    div(class="modal-header")
+                                        h5(class="modal-title" id="exampleModalLabel") Tahrirlash 
+                                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                            span(aria-hidden="true") &times;
+                                    div(class="modal-body") 
+                                        .form-group
+                                            label(for="amal" + elem._id) Amal
+                                            input(class="form-control" id="amal" + elem._id name="work_text1" value=`${elem.work_text}`) 
+                                        .form-group
+                                            label(for="worktype1" + elem._id) Vazifa turi
+                                            select(value=`${elem.work_type}` class="form-control" id="worktype1" + elem._id name="work_type1")
+                                                    option(value="1") Tayyorgarlik va yakuniy
+                                                    option(value="2") Ish joyiga xizmat ko'rsatish
+                                                    option(value="3") Statistik ishlarning bajarilishi
+                                                    option(value="4") Reglamentlangan tanafus
+                                                    option(value="5") Qisqa tanafus
+                                                    option(value="6") Boshqa funksialar
+                                        .form-group
+                                            label(for="start1" + elem._id) Amalning boshlanish vaqti
+                                            input(type="datetime-local" id="start1" + elem._id class="form-control" name="start_date1")
+                                        .form-group
+                                            label(for="end1" + elem._id) Amalning tugash vaqti
+                                            input(type="datetime-local" id="end1" + elem._id class="form-control" name="finish_date1")
+                                        .form-group
+                                            label(for="work_duraction" + elem._id ) Davomiyligi  (daqiqa)
+                                            input(class="form-control" id="work_duraction1" + elem._id name="duration1" value=`${elem.duration}`)
+                                        .form-group
+                                            label(for="amal1") Ish kodi
+                                            input(class="form-control" id="amal1" + elem._id name="work_code1" value=`${elem.work_code}`)
+                                    div(class="modal-footer")
+                                        button(type="button" class="btn btn-secondary" data-dismiss="modal") Chiqish
+                                        input(type="button" class="btn btn-default btn-primary edit111" value="O'zgarishni saqlash" data_elem_id=`${elem._id}` onClick=`editWork(event)`)
+            .my-navbar
+                a(href="/" class="active") Home
+                a(href="https://stat.uz/uz/") Stat.uz
+                a(href="/new_password" class="right") Kalitni o'zgartirish
+            .my-row 
+                .side 
+                    h2 Xodim
+                    h5= user.firs_name + " " + user.last_name + " " + user.father_name
+                    div(class="fakeimg")= user.management + " " + user.section + " " + user.position
+                    br
+                    h5 Vaqt daqiqalarda
+                    table.table.table-bordered
+                        thead   
+                            tr 
+                                th Jami
+                                th= parseInt(type_minuts.type1) + parseInt(type_minuts.type2) + parseInt(type_minuts.type3) + parseInt(type_minuts.type4) + parseInt(type_minuts.type5) + parseInt(type_minuts.type6)
+                        tbody 
+                            tr 
+                                td Tayyorgarlik va yakuniy
+                                td= type_minuts.type1
+                            tr 
+                                td Ish joyiga xizmat ko'rsatish
+                                td= type_minuts.type2
+                            tr 
+                                td Statistik ishlarning bajarilishi
+                                td= type_minuts.type3
+                            tr 
+                                td Reglamentlangan tanafus
+                                td= type_minuts.type4
+                            tr 
+                                td Qisqa tanafus
+                                td= type_minuts.type5
+                            tr 
+                                td Boshqa funksialar
+                                td= type_minuts.type6
+                .main 
+                    h2 XODIMNING KUNLIK BAJARGAN ISHLARI
+                    br
+                    h5= new Date().getUTCDate() + "/" + (new Date().getUTCMonth() + 1) + "/" + new Date().getUTCFullYear()
+                    form(id="form-login" data_id=user._id)
+                        .form-group
+                            table.table.table-bordered
+                                thead 
+                                    tr 
+                                        th Amallar
+                                        th Vazifa turi
+                                        th Amalning boshlanish vaqti
+                                        th Amalning tugash vaqti
+                                        th Davomiyligi  (daqiqa)
+                                        th Ish kodi
+                                tbody 
+                                    each elem in works
+                                        +worked(elem) 
+                                    tr 
+                                        td 
+                                            input(type="text" class="form-control" id="exampleFormControlInput1" name="work_text" placeholder="Ammallar")
+                                        td 
+                                            select(value="2" class="form-control" id="exampleFormControlSelect1" name="work_type")
+                                                option(value="1") Tayyorgarlik va yakuniy
+                                                option(value="2") Ish joyiga xizmat ko'rsatish
+                                                option(value="3") Statistik ishlarning bajarilishi
+                                                option(value="4") Reglamentlangan tanafus
+                                                option(value="5") Qisqa tanafus
+                                                option(value="6") Boshqa funksialar
+                                        td  
+                                            input(type="datetime-local" id="start" value="" class="form-control" name="start_date")
+                                        td 
+                                            input(type="datetime-local" id="end" value="" class="form-control" name="finish_date")
+                                        td 
+                                            input(type="text" value="" class="form-control" id="work_duraction" name="duration")
+                                        td
+                                            div(class="autocomplete")
+                                                input(id="myInput" type="text" class="form-control" value="01000000" name="work_code")
+                                        td 
+                                            input(type="submit" class="btn btn-default btn-submit" value="Qo'shish")
+                        
+                        a(href=`/download_pdf?user_id=${user._id}&date=${new Date()}` id="elementH" class="btn btn-outline-secondary mx-2" target="_blank") Ko'rish chop etish
+                        //- <a type="button" class="btn btn-outline-secondary">Secondary</a>
+                    script.
+                        var request;
+                        $('#start').value = new Date();
+                        $('#end').value = new Date();
+                        $("#form-login").submit(function(event){
+                            event.preventDefault();
+                            if (request) {
+                                request.abort();
+                            }
+                            var $form = $(this);
+                            var $inputs = $form.find("input, select, button, textarea");
+                            var serializedData = $form.serialize();
+                            console.log(serializedData);
+                            $inputs.prop("disabled", true);
+                            request = $.ajax({
+                                url: "/employee/add_work?" + serializedData + "&id="+$form.attr("data_id")+"",
+                                type: "post",
+                                data: serializedData
+                            });
+                            request.done(function (response, textStatus, jqXHR){
+                                console.log("Hooray, it worked!" + " saqlandi: " + response.saqlandi);
+                                if(response.saqlandi == true){
+                                    location.reload();
+                                }else{
+                                    alert("malumotlar kiritilishida xatolik");
+                                }
+                            });
+                            request.fail(function (jqXHR, textStatus, errorThrown){
+                                console.error(
+                                    "The following error occurred: "+
+                                    textStatus, errorThrown
+                                );
+                            });
+                            request.always(function () {
+                                $inputs.prop("disabled", false);
+                            });
+
+                        });
+                    br
+                    script(src="js/main.js")
+            //- .footer 
+            //-     h4 Axborot-kommunikatsiya texnologiyalarini rivojlantirish va interaktiv davlat xizmatlari boshqarmasi
