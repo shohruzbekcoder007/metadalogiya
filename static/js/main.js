@@ -151,7 +151,7 @@ function autocomplete(inp, arr) {
         let tr = $(`
           <tr> 
             <td>
-              <a href="/user_change?user_id=${employee._id}&date=${mainDate}">${employee.last_name + " " + employee.firs_name + " " + employee.father_name}</a>
+              <a href="/user_change?user_id=${employee._id}&date=${mainDate}">${employee.last_name + " " + employee.first_name + " " + employee.father_name}</a>
             </td>
             <td>
               ${employee.management}

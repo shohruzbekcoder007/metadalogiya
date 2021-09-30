@@ -366,7 +366,7 @@ router.get("/download_pdf", async (req, res) => {
 
         doc.fill("#115dc8")
             .fontSize(12)
-            .text("    " + user.firs_name  + " " + user.last_name + " " + user.father_name + ". Tabel raqami: " + (user.table_number || user.inn), doc.header.x, doc.header.y)
+            .text("    " + user.first_name  + " " + user.last_name + " " + user.father_name + ". Tabel raqami: " + (user.table_number || user.inn), doc.header.x, doc.header.y)
             .text("    " + user.management  + ". Kod: " + user.management_code , doc.header.x, doc.header.y + 15)
             .text("    " + user.section  + ". Kod: " + user.section_code, doc.header.x, doc.header.y + 29)
             .text("    Lavozim: " + user.position  + ". Kod: " + user.position_code, doc.header.x, doc.header.y + 42)
@@ -395,16 +395,38 @@ router.get("/download_pdf", async (req, res) => {
             headAlign: 'center'
         });
     }else{
-        doc.fill("#115dc8").fontSize(12).text("    Bu sana uchun xodimning bajargan ishlari haqida malumotlar yo'q", 0)
+        doc
+        // .fill("#115dc8")
+        .fontSize(12)
+        .text("    Bu sana uchun xodimning bajargan ishlari haqida malumotlar yo'q", 0)
     }   
 
     doc.render();
 
-    doc.fill("#115dc8").fontSize(12).text("    Bajaruvchining imzosi:   _________________________", 0, doc.y+50)
-    doc.fill("#115dc8").fontSize(12).text("    Tarkibiy bo'linma rahbarining imzosi:   _________________________", 0, doc.y+30)
-    doc.fill("#115dc8").fontSize(12).text("    Ishchi guruh azosi, tekshiruvchi(FISH):   ________________________________________________", 0, doc.y+30)
-    doc.fill("#115dc8").fontSize(12).text("    Anketa to'ldirilishi(imzo):   _________________________", 0, doc.y+30)
-    doc.fill("#115dc8").fontSize(12).text(`    Sana:    ${new Date(query.date).getUTCDay()}/${new Date(query.date).getUTCMonth()}/${new Date(query.date).getUTCFullYear()}`, 0, doc.y+30)
+    doc
+    .fill("#115dc8")
+    .fontSize(12)
+    .text("    Bajaruvchining imzosi:   _________________________", 0, doc.y+50)
+
+    doc
+    .fill("#115dc8")
+    .fontSize(12)
+    .text("    Tarkibiy bo'linma rahbarining imzosi:   _________________________", 0, doc.y+30)
+
+    doc
+    .fill("#115dc8")
+    .fontSize(12)
+    .text("    Ishchi guruh azosi, tekshiruvchi(FISH):   ________________________________________________", 0, doc.y+30)
+    
+    doc
+    .fill("#115dc8")
+    .fontSize(12)
+    .text("    Anketa to'ldirilishi(imzo):   _________________________", 0, doc.y+30)
+    
+    doc
+    .fill("#115dc8")
+    .fontSize(12)
+    .text(`    Sana:    ${new Date(query.date).getUTCDay()}/${new Date(query.date).getUTCMonth()}/${new Date(query.date).getUTCFullYear()}`, 0, doc.y+30)
 
     doc.pipe(res);
     doc.end();
