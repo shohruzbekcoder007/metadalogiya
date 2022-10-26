@@ -1,0 +1,74 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="/css/semantic.css")
+        link(rel="stylesheet" href="/css/starter.css")
+        link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/jquery.js")
+        script(src="/js/semantic.js")
+        script(src="/js/axios.js")
+        title Document
+    body
+        // Following Menu
+        .ui.large.top.fixed.hidden.menu
+            .ui.container
+                a.active.item Rejalashtirish(Qo'mita)
+                a(href="/management/region").item Rejalashtirish(Hududiy boshqarmalar)
+                a(href="/management/town").item Rejalashtirish(Hududiy bo'limlar)
+                .right.menu
+                    .item
+                        a(href="/").ui.button Logout
+        // Sidebar Menu
+        .ui.vertical.inverted.sidebar.menu
+            a.active.item Rejalashtirish(Qo'mita)
+            a(href="/management/region").item Rejalashtirish(Hududiy boshqarmalar)
+            a(href="/management/town").item Rejalashtirish(Hududiy bo'limlar)
+            a(href="/").item Logout
+        .pusher
+            .ui.inverted.vertical.masthead.segment.header-color
+                .ui.container
+                    .ui.text.menu
+                        .ui.right.dropdown.item.item--white=name
+                            i.dropdown.icon
+                    h1.ui.inverted.header
+                        | Davlat statistika qo'mitasi
+                .ui.container
+                    .ui.secondary.inverted.pointing.menu
+                        a.toc.item
+                            i.sidebar.icon
+                        a.active.item Rejalashtirish(Qo'mita)
+                        a(href="/management/region").item Rejalashtirish(Hududiy boshqarmalar)
+                        a(href="/management/town").item Rejalashtirish(Hududiy bo'limlar)
+                        .right.item
+                            a(href="/").ui.inverted.button Logout
+            .ui.hidden.divider
+            form(action='/management/rep' method='post').ui.container.large.equal.width.form.segment
+                h4.ui.dividing.header Create management(Qo'mita)
+                .fields
+                    .seven.wide.field
+                        label Management
+                        input(type='text' placeholder='Management' name="name")
+                    .six.wide.field
+                        
+                        .two.fields
+                            .field 
+                                label User name
+                                input(type='text' placeholder='User name' name="user_name")
+                            .field
+                                label Password
+                                input(type='text' name='password' placeholder='Password')
+                button.ui.button(type="submit") Create
+            .ui.container.large.equal.width.form.segment
+                table.ui.celled.table
+                    thead
+                        tr
+                            th Name
+                            th User Name
+                            th(style="width: 150px") Delete
+                    tbody#replist
+            .ui.hidden.divider
+        script(src="/js/main.js")
+        script(src="/js/main_super_admin.js")

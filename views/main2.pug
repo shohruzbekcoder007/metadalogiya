@@ -1,0 +1,96 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="/css/semantic.css")
+        link(rel="stylesheet" href="/css/starter.css")
+        link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/jquery.js")
+        script(src="/js/semantic.js")
+        script(src="/js/axios.js")
+        title Document
+    body
+        mixin month(month_code)
+            case month_code
+                when 1
+                    td Yanvar
+                when 2
+                    td Fevral
+                when 3
+                    td Mart
+                when 4
+                    td Aprel
+                when 5
+                    td May
+                when 6
+                    td Iyun
+                when 7
+                    td Iyul
+                when 8
+                    td Avgust
+                when 9
+                    td Sentabr
+                when 10
+                    td Oktabr
+                when 11
+                    td Noyabr
+                when 12
+                    td Dekabr
+                default
+                    td
+        // Following Menu
+        .ui.large.top.fixed.hidden.menu
+            .ui.container
+                a(href="/task/taskone").item Rejadagi ishlar
+                a(href="/task/tasktwo").item Tasdiqlanishi kutilayotgan
+                a(href="/task/taskthree").active.item Tasdiqlangan
+                a(href="/task/taskfour").item Vaqti o'tgan
+                .right.menu
+                    .item
+                        a(href="/").ui.button Logout
+        // Sidebar Menu
+        .ui.vertical.inverted.sidebar.menu
+            a(href="/task/taskone").item Rejadagi ishlar
+            a(href="/task/tasktwo").item Tasdiqlanishi kutilayotgan
+            a(href="/task/taskthree").active.item Tasdiqlangan
+            a(href="/task/taskfour").item Vaqti o'tgan
+            a(href="/").item Logout
+        .pusher
+            .ui.inverted.vertical.masthead.segment.header-color
+                .ui.container
+                    .ui.text.menu
+                        .ui.right.dropdown.item.item--white=name
+                            i.dropdown.icon
+                    h1.ui.inverted.header
+                        | Davlat statistika qo'mitasi
+                .ui.container
+                    .ui.secondary.inverted.pointing.menu
+                        a.toc.item
+                            i.sidebar.icon
+                        a(href="/task/taskone").item Rejadagi ishlar
+                        a(href="/task/tasktwo").item Tasdiqlanishi kutilayotgan
+                        a(href="/task/taskthree").active.item Tasdiqlangan
+                        a(href="/task/taskfour").item Vaqti o'tgan
+                        .right.item
+                            a(href="/").ui.inverted.button Logout
+            .ui.hidden.divider
+            .ui.container.large.equal.width.form.segment
+                table.ui.celled.table
+                    thead
+                        tr
+                            th Task text
+                            th Month
+                            th Year
+                            th Biriktirilgan file
+                    tbody
+                        - for (let i = 0; i < tasks.length; i++)
+                                tr.positive
+                                    td=tasks[i].text
+                                    +month(tasks[i].date_month)
+                                    td=tasks[i].date_year
+                                    td 
+                                        a(href=`${tasks[i].file_url}` target="_blank")=tasks[i].file_url
+            .ui.hidden.divider
+    script(src="/js/main_page.js")

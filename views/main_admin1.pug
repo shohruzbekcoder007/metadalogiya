@@ -1,0 +1,93 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="/css/semantic.css")
+        link(rel="stylesheet" href="/css/starter.css")
+        link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/jquery.js")
+        script(src="/js/semantic.js")
+        script(src="/js/axios.js")
+        title Document
+    body
+        // Following Menu
+        .ui.large.top.fixed.hidden.menu
+            .ui.container
+                a(href='/task/rep').item Rejalashtirish(Qo'mita)
+                a.active.item Rejalashtirish(Hududiy boshqarmalar)
+                a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
+                a(href='/task/check').item Tekshirish
+                .right.menu
+                    .item
+                        a(href="/").ui.button Logout
+        // Sidebar Menu
+        .ui.vertical.inverted.sidebar.menu
+            a(href='/task/rep').item Rejalashtirish(Qo'mita)
+            a.active.item Rejalashtirish(Hududiy boshqarmalar)
+            a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
+            a(href='/task/check').item Tekshirish
+            a(href="/").item Logout
+        .pusher
+            .ui.inverted.vertical.masthead.segment.header-color
+                .ui.container
+                    .ui.text.menu
+                        .ui.right.dropdown.item.item--white=name
+                            i.dropdown.icon
+                    h1.ui.inverted.header
+                        | Davlat statistika qo'mitasi
+                .ui.container
+                    .ui.secondary.inverted.pointing.menu
+                        a.toc.item
+                            i.sidebar.icon
+                        a(href='/task/rep').item Rejalashtirish(Qo'mita)
+                        a.active.item Rejalashtirish(Hududiy boshqarmalar)
+                        a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
+                        a(href='/task/check').item Tekshirish
+                        .right.item
+                            a(href="/").ui.inverted.button Logout
+            .ui.hidden.divider
+            form(action='/task/region' method='post').ui.container.large.equal.width.form.segment
+                h4.ui.dividing.header Create work
+                .fields
+                    .seven.wide.field
+                        label Management
+                        select#region_user.ui.fluid.search.dropdown(name="user_id")
+                    .two.wide.field
+                        label Lifetime
+                        .two.fields
+                            .field
+                                select.ui.fluid.search.dropdown(name='date_month')
+                                    option(value=1) January
+                                    option(value=2) February
+                                    option(value=3) March
+                                    option(value=4) April
+                                    option(value=5) May
+                                    option(value=6) June
+                                    option(value=7) July
+                                    option(value=8) August
+                                    option(value=9) September
+                                    option(value=10) October
+                                    option(value=11) November
+                                    option(value=12) December
+                            .field
+                                input(type='number' value="2022" name="date_year" placeholder='Year')
+                .fields
+                    .field
+                        label Task
+                        input(type='text' name="text" placeholder='Task')
+                button(type="submit").ui.button Create
+            .ui.container.large.equal.width.form.segment
+                table.ui.celled.table
+                    thead
+                        tr
+                            th Name
+                            th User Name
+                            th Task
+                            th Month
+                            th Year
+                            th Update
+                    tbody#tasklist
+            script(src="/js/main.js")
+            script(src="/js/main_admin1.js")

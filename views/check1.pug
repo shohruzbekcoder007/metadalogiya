@@ -1,0 +1,78 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="/css/semantic.css")
+        link(rel="stylesheet" href="/css/starter.css")
+        link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/jquery.js")
+        script(src="/js/semantic.js")
+        script(src="/js/axios.js")
+        title Document
+    body
+        // Following Menu
+        .ui.large.top.fixed.hidden.menu
+            .ui.container
+                a(href='/task/rep').item Rejalashtirish(Qo'mita)
+                a(href='/task/town').item Rejalashtirish(Hududiy boshqarmalar)
+                a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
+                a.active.item Tekshirish
+                .right.menu
+                    .item
+                        a(href="/").ui.button Logout
+        // Sidebar Menu
+        .ui.vertical.inverted.sidebar.menu
+            a(href='/task/rep').item Rejalashtirish(Qo'mita)
+            a(href='/task/town').item Rejalashtirish(Hududiy boshqarmalar)
+            a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
+            a.active.item Tekshirish
+            a(href="/").item Logout
+        .pusher
+            .ui.inverted.vertical.masthead.segment.header-color
+                .ui.container
+                    .ui.text.menu
+                        .ui.right.dropdown.item.item--white=name
+                            i.dropdown.icon
+                    h1.ui.inverted.header
+                        | Davlat statistika qo'mitasi
+                .ui.container
+                    .ui.secondary.inverted.pointing.menu
+                        a.toc.item
+                            i.sidebar.icon
+                        a(href='/task/rep').item Rejalashtirish(Qo'mita)
+                        a(href='/task/town').item Rejalashtirish(Hududiy boshqarmalar)
+                        a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
+                        a.active.item Tekshirish
+                        .right.item
+                            a(href="/").ui.inverted.button Logout
+            .ui.hidden.divider
+            .ui.container
+                .btn-group
+                    .ui.buttons
+                        a(href='/task/check').ui.button.primary.basic Qo'mita
+                        a(href='/task/checkone').ui.button.primary.active Hududit boshqarmalar
+                        a(href='/task/checktwo').ui.button.primary.basic Hududiy bo'limlar
+                .ui.hidden.divider
+                .ui.container.large.equal.width.form.segment
+                    h4.ui.dividing.header Work
+                    .fields
+                        .seven.wide.field
+                            label Management
+                            select#region_user.ui.fluid.search.dropdown(name="user_id")
+                        .two.wide.field
+                            label Lifetime
+                            .two.fields
+                                .field
+                                    select#task_status.ui.fluid.search.dropdown(name='date_month')
+                                        option(value=1) Vazifa qo'yilganlar
+                                        option(value=2) Tekshiruvga o'tkazilgan
+                                        option(value=3) Tasdiqlangan
+                                        option(value=4) Vaqti o'tgan
+                    .checking-btn 
+                        button#reportbtn.ui.button Checking
+                #reportarea
+                .ui.hidden.divider
+            script(src="/js/main.js")
+            script(src="/js/check1.js")
