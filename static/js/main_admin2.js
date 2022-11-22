@@ -76,9 +76,10 @@ const createTaskList = (data) => {
                 <td>${elem.user_id.name}</td>
                 <td>${elem.user_id.user_name}</td>
                 <td>${elem.text}</td>
+                <td>${elem.date_day || ""}</td>
                 <td>${stringMonth(elem.date_month)}</td>
                 <td>${elem.date_year}</td>
-                <td><button class="ui red button" data-btn="${elem._id}" onclick="deleteFunction(event)">Delete</button></td>
+                <td><button class="ui red button" data-btn="${elem._id}" onclick="deleteFunction(event)">O'chirish</button></td>
             </tr>`)
         })
     }

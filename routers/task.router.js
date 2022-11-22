@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const _ = require('lodash')
 const { cookieJwtAuth } = require('./../middleware/cookieJwtAuth.middleware')
-
+const creatr_log = require('../log/create_log')
 const { Task } = require('./../models/task.model')
 
 router.post('/rep', cookieJwtAuth,  async (req, res) => {
@@ -15,16 +15,19 @@ router.post('/rep', cookieJwtAuth,  async (req, res) => {
                 text: req.body.text,
                 date_month: req.body.date_month,
                 date_year: req.body.date_year,
+                date_day: req.body.date_day,
                 task_status: 1
             })
             let new_task = await task.save()
 
-            if(new_task)
+            if(new_task){
+                await creatr_log(req.user._id, `Yangi vazifa yaratildi (mazmun: ${new_task.text})!!!`)
                 return res.render("main_admin", {
                     task: new_task,
                     name: user.name,
                     user_id: new_task.user_id
                 })
+            }
             else 
                 return res.send("Tizimda xatolik yuzaga keldi")
 
@@ -57,14 +60,17 @@ router.post('/region', cookieJwtAuth,  async (req, res) => {
                 text: req.body.text,
                 date_month: req.body.date_month,
                 date_year: req.body.date_year,
+                date_day: req.body.date_day,
                 task_status: 1
             })
             let new_task = await task.save()
 
-            if(new_task)
+            if(new_task){
+                await creatr_log(req.user._id, `Yangi vazifa yaratildi(mazmun: ${new_task.text})!!!`)
                 return res.render("main_admin1", {
                     task: new_task
                 })
+            }
             else 
                 return res.send("Tizimda xatolik yuzaga keldi")
 
@@ -97,15 +103,18 @@ router.post('/town', cookieJwtAuth,  async (req, res) => {
                 text: req.body.text,
                 date_month: req.body.date_month,
                 date_year: req.body.date_year,
+                date_day: req.body.date_day,
                 task_status: 1
             })
             let new_task = await task.save()
 
-            if(new_task)
+            if(new_task){
+                await creatr_log(req.user._id, `Yangi vazifa yaratildi(mazmun: ${new_task.text})!!!`)
                 return res.render("main_admin2", {
                     task: new_task,
                     name: user.name
                 })
+            }
             else 
                 return res.send("Tizimda xatolik yuzaga keldi")
 
@@ -250,6 +259,7 @@ router.get('/checktaskone', cookieJwtAuth,  async (req, res) => {
 router.post('/chackestatustwo', cookieJwtAuth, async (req, res) => {
     try{
         const taskwithotherstatus = await Task.findOneAndUpdate({_id: req.body._id}, {$set: {task_status: 3}}, {new: true})
+        await creatr_log(req.user._id, `Vazifa bajarilganlikka tasdiqlandi(Vazifa mazmuni: ${taskwithotherstatus.text})!!!`)
         return res.send(taskwithotherstatus)
     }catch(err){
         return res.send({})
@@ -272,10 +282,10 @@ router.get('/tasks', async (req, res) => {
 })
 
 router.delete('/delete', cookieJwtAuth, async (req, res) => {
-    let user = await Task.findByIdAndRemove(req.query.id);
-    if (!user)
+    let task = await Task.findByIdAndRemove(req.query.id);
+    if (!task)
         return res.status(400).send({ok: false});
-
+    await creatr_log(req.user._id, `Belgilangan vazifa o'chirildi(Vazifa mazmuni: ${task.text})!!!`)
     return res.send({ok: true});
 })
 

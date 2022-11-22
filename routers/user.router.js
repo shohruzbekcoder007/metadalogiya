@@ -3,9 +3,11 @@ const router = express.Router()
 const _ = require('lodash')
 const bcrypt = require('bcryptjs')
 const { cookieJwtAuth } = require('./../middleware/cookieJwtAuth.middleware')
+const creatr_log = require('../log/create_log')
 
 const { User } = require('./../models/user.model')
 const { Task } = require('./../models/task.model')
+const { Group } = require('./../models/group.model')
 
 router.post('/',  async (req, res) => {
     try{
@@ -46,6 +48,7 @@ router.post('/login', async (req, res) => {
         // signed: true
     })
 
+    creatr_log(user._id, `(${user.name}) saytga kirdi`)
     if (user.status == 1){
         let my_tasks = await Task.find({ user_id: user._id, task_status: 1 });
         return res.render("main", {
@@ -92,11 +95,80 @@ router.get('/users', cookieJwtAuth,  async (req, res) => {
     
 })
 
+router.put('/update', cookieJwtAuth, async (req, res) => {
+    
+    if(!req.body._id){
+        return res.send("No such user exists")
+    }
+
+    const _id = req.body._id
+
+    let updateDate = {}
+
+    if(req.body.user_name){
+        updateDate.user_name = req.body.user_name
+    }
+
+    if(req.body.name){
+        updateDate.name = req.body.name
+    }
+
+    if(req.body.password){
+        const salt = await bcrypt.genSalt();
+        updateDate.password = await bcrypt.hash(req.body.password, salt);
+    }
+    
+    let user = await User.findByIdAndUpdate(_id, updateDate);
+    if (!user)
+        return res.status(400).send('User\'s information is not update');
+
+    creatr_log(req.user._id, `(${user.name}) malumotlari o'zgartirildi`)
+    const token = user.generateAuthToken();
+    return res.header('x-auth-token', token).send(_.pick(user, ['_id']));
+})
+
+router.put('/updatewithgroup', cookieJwtAuth, async (req, res) => {
+    
+    if(!req.body._id){
+        return res.send("No such user exists")
+    }
+
+    const _id = req.body._id
+
+    let updateDate = {}
+
+    if(req.body.user_name){
+        updateDate.user_name = req.body.user_name
+    }
+
+    if(req.body.name){
+        updateDate.name = req.body.name
+    }
+
+    if(req.body.password){
+        const salt = await bcrypt.genSalt();
+        updateDate.password = await bcrypt.hash(req.body.password, salt);
+    }
+    
+    let user = await User.findByIdAndUpdate(_id, updateDate);
+    if (!user && req.body.region_user)
+        return res.status(400).send('User\'s information is not update');
+
+    let group = await Group.findOneAndUpdate({town_id: _id}, {region_user: req.body.region_user}, {new: true});
+    if (!group)
+        return res.status(400).send('Group\'s information is not update');
+
+    creatr_log(req.user._id, `(${user.name}) malumotlari o'zgartirildi`)
+    const token = user.generateAuthToken();
+    return res.header('x-auth-token', token).send(_.pick(user, ['_id']));
+})
+
 router.delete('/delete', cookieJwtAuth, async (req, res) => {
     let user = await User.findByIdAndRemove(req.query.id);
     if (!user)
         return res.status(400).send({ok: false});
 
+    creatr_log(req.user._id, `(${user.name}) o'chirildi`)
     return res.send({ok: true});
 })
 

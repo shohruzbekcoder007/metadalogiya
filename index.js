@@ -10,6 +10,7 @@ const management = require('./routers/management.router')
 const task = require('./routers/task.router')
 const group = require('./routers/group.router')
 const file = require('./routers/file.router')
+const log = require('./routers/log.router')
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/management', management)
 app.use('/task', task)
 app.use('/group', group)
 app.use('/file', file)
+app.use('/log', log)
 
 app.get("/", (req,res) => {
   return res.render('login', {})

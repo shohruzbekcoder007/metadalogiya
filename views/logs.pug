@@ -1,0 +1,63 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="/css/semantic.css")
+        link(rel="stylesheet" href="/css/starter.css")
+        link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/jquery.js")
+        script(src="/js/semantic.js")
+        script(src="/js/axios.js")
+        title Document
+    body
+        // Following Menu
+        .ui.large.top.fixed.hidden.menu
+            .ui.container
+                a(href="/management/rep").item Qo'mita
+                a(href="/management/region").item Hududiy boshqarmalar
+                a(href="/management/town").item Hududiy bo'limlar
+                a.active.item Malumotlar
+                .right.menu
+                    .item
+                        a(href="/").ui.button Chiqish
+        // Sidebar Menu
+        .ui.vertical.inverted.sidebar.menu
+            a(href="/management/rep").item Qo'mita
+            a(href="/management/region").item Hududiy boshqarmalar
+            a(href="/management/town").item Hududiy bo'limlar
+            a.active.item Malumotlar
+            a(href="/").item Chiqish
+        .pusher
+            .ui.inverted.vertical.masthead.segment.header-color
+                .ui.container
+                    .ui.text.menu
+                        .ui.right.dropdown.item.item--white=name
+                            i.dropdown.icon
+                    h1.ui.inverted.header
+                        | Davlat statistika qo'mitasi
+                .ui.container
+                    .ui.secondary.inverted.pointing.menu
+                        a.toc.item
+                            i.sidebar.icon
+                        a(href="/management/rep").item Qo'mita
+                        a(href="/management/region").item Hududiy boshqarmalar
+                        a(href="/management/town").item Hududiy bo'limlar
+                        a.active.item Malumotlar
+                        .right.item
+                            a(href="/").ui.inverted.button Chiqish
+            .ui.hidden.divider
+            .ui.container.large.equal.width.form.segment
+                table.ui.celled.table
+                    thead
+                        tr
+                            th Foydalanuvchi
+                            th Bajargan ishi
+                    tbody
+                        each log in logs
+                            tr
+                                td= log.user.user_name
+                                td= log.information
+            .ui.hidden.divider
+        script(src="/js/main.js")

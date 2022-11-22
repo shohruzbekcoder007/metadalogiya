@@ -21,14 +21,14 @@ html(lang="en")
                 a(href='/task/check').item Tekshirish
                 .right.menu
                     .item
-                        a(href="/").ui.button Logout
+                        a(href="/").ui.button Chiqish
         // Sidebar Menu
         .ui.vertical.inverted.sidebar.menu
             a.active.item Rejalashtirish(Qo'mita)
             a(href='/task/region').item Rejalashtirish(Hududiy boshqarmalar)
             a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
             a(href='/task/check').item Tekshirish
-            a(href="/").item Logout
+            a(href="/").item Chiqish
         .pusher
             .ui.inverted.vertical.masthead.segment.header-color
                 .ui.container
@@ -46,48 +46,51 @@ html(lang="en")
                         a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
                         a(href='/task/check').item Tekshirish
                         .right.item
-                            a(href="/").ui.inverted.button Logout
+                            a(href="/").ui.inverted.button Chiqish
             .ui.hidden.divider
             form(action='/task/rep' method='post').ui.container.large.equal.width.form.segment
-                h4.ui.dividing.header Create work
+                h4.ui.dividing.header Vazifa yaratish
                 .fields
                     .seven.wide.field
-                        label Management
+                        label Boshqarma
                         select#region_user.ui.fluid.search.dropdown(name="user_id" data-selected=`${user_id}`)
                     .two.wide.field
-                        label Lifetime
+                        label Vaqt
                         .two.fields
                             .field
-                                select.ui.fluid.search.dropdown(name='date_month')
-                                    option(value=1) January
-                                    option(value=2) February
-                                    option(value=3) March
-                                    option(value=4) April
-                                    option(value=5) May
-                                    option(value=6) June
-                                    option(value=7) July
-                                    option(value=8) August
-                                    option(value=9) September
-                                    option(value=10) October
-                                    option(value=11) November
-                                    option(value=12) December
+                                input(type='number' value="30" name="date_day" placeholder='Kun')
                             .field
-                                input(type='number' value="2022" name="date_year" placeholder='Year')
+                                select.ui.fluid.search.dropdown(name='date_month')
+                                    option(value=1) Yanvar
+                                    option(value=2) Fevral
+                                    option(value=3) Mart
+                                    option(value=4) Aprel
+                                    option(value=5) May
+                                    option(value=6) Iyun
+                                    option(value=7) Iyul
+                                    option(value=8) Avgust
+                                    option(value=9) Sentabr
+                                    option(value=10) Oktabr
+                                    option(value=11) Noyabr
+                                    option(value=12) Dekabr
+                            .field
+                                input(type='number' value="2022" name="date_year" placeholder='Yil')
                 .fields
                     .field
-                        label Task
-                        input(type='text' name="text" placeholder='Task')
-                button(type="submit").ui.button Create
+                        label Vazifa
+                        input(type='text' name="text" placeholder='Vazifa')
+                button(type="submit").ui.button Yaratish
             .ui.container.large.equal.width.form.segment
                 table.ui.celled.table
                     thead
                         tr
-                            th Name
-                            th User Name
-                            th Task
-                            th Month
-                            th Year
-                            th Update
+                            th Nomi
+                            th Foydalanuvchi nomi
+                            th Vazifa
+                            th Kun
+                            th Oy
+                            th Yil
+                            th O'zgartirish
                     tbody#tasklist
             script(src="/js/main.js")
             script(src="/js/main_admin.js")

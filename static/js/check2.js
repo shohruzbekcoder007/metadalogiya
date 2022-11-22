@@ -54,6 +54,7 @@ $(document).ready(function () {
                 tbody = tbody +
                     `<tr>
                                 <td>${elem.text}</td>
+                                <td>${elem.date_day || ""}</td>
                                 <td>${elem.date_month}</td>
                                 <td>${elem.date_year}</td>
                             </tr>`
@@ -63,9 +64,10 @@ $(document).ready(function () {
             <table class="ui celled table">
             <thead>
                 <tr>
-                    <th>Task text</th>
-                    <th>Month</th>
-                    <th>Year</th>
+                    <th>Vazifa</th>
+                    <th>Kun</th>
+                    <th>Oy</th>
+                    <th>Yil</th>
                 </tr>
             </thead>
             <tbody id="#reporttbodyone">
@@ -81,10 +83,11 @@ $(document).ready(function () {
             data.forEach(elem => {
                 tbody = tbody + `<tr>
                                     <td>${elem.text}</td>
+                                    <td>${elem.date_day || ""}</td>
                                     <td>${elem.date_month}</td>
                                     <td>${elem.date_year}</td>
                                     <td>
-                                        <a href="${elem.file_url}" target="_blank">${elem.file_url}</a>
+                                        <a href="${elem.file_url}" target="_blank">yuklangan file</a>
                                     </td>
                                     <td><button class='ui button' onclick="fun(event)" data-id="${elem._id}">Tasdiqlash</button></td>
                                 </tr>`
@@ -94,9 +97,10 @@ $(document).ready(function () {
             <table class="ui celled table">
             <thead>
                 <tr>
-                    <th>Task text</th>
-                    <th>Month</th>
-                    <th>Year</th>
+                    <th>Vazifa</th>
+                    <th>Kun</th>
+                    <th>Oy</th>
+                    <th>Yil</th>
                     <th>Biriktirilgan file</th>
                     <th>Tasdiqlash</th>
                 </tr>
@@ -114,10 +118,11 @@ $(document).ready(function () {
             data.forEach(elem => {
                 tbody = tbody + `<tr>
                                     <td>${elem.text}</td>
+                                    <td>${elem.date_day || ""}</td>
                                     <td>${elem.date_month}</td>
                                     <td>${elem.date_year}</td>
                                     <td>
-                                        <a href="${elem.file_url}" target="_blank">${elem.file_url}</a>
+                                        <a href="${elem.file_url}" target="_blank">yuklangan file</a>
                                     </td>
                                 </tr>`
             })
@@ -126,9 +131,10 @@ $(document).ready(function () {
             <table class="ui celled table">
             <thead>
                 <tr>
-                    <th>Task text</th>
-                    <th>Month</th>
-                    <th>Year</th>
+                    <th>Vazifa</th>
+                    <th>Kun</th>
+                    <th>Oy</th>
+                    <th>Yil</th>
                     <th>Biriktirilgan file</th>
                 </tr>
             </thead>

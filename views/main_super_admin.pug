@@ -15,18 +15,20 @@ html(lang="en")
         // Following Menu
         .ui.large.top.fixed.hidden.menu
             .ui.container
-                a.active.item Rejalashtirish(Qo'mita)
-                a(href="/management/region").item Rejalashtirish(Hududiy boshqarmalar)
-                a(href="/management/town").item Rejalashtirish(Hududiy bo'limlar)
+                a.active.item Qo'mita
+                a(href="/management/region").item Hududiy boshqarmalar
+                a(href="/management/town").item Hududiy bo'limlar
+                a(href="/log").item Malumotlar
                 .right.menu
                     .item
-                        a(href="/").ui.button Logout
+                        a(href="/").ui.button Chiqish
         // Sidebar Menu
         .ui.vertical.inverted.sidebar.menu
-            a.active.item Rejalashtirish(Qo'mita)
-            a(href="/management/region").item Rejalashtirish(Hududiy boshqarmalar)
-            a(href="/management/town").item Rejalashtirish(Hududiy bo'limlar)
-            a(href="/").item Logout
+            a.active.item Qo'mita
+            a(href="/management/region").item Hududiy boshqarmalar
+            a(href="/management/town").item Hududiy bo'limlar
+            a(href="/log").item Malumotlar
+            a(href="/").item Chiqish
         .pusher
             .ui.inverted.vertical.masthead.segment.header-color
                 .ui.container
@@ -39,36 +41,57 @@ html(lang="en")
                     .ui.secondary.inverted.pointing.menu
                         a.toc.item
                             i.sidebar.icon
-                        a.active.item Rejalashtirish(Qo'mita)
-                        a(href="/management/region").item Rejalashtirish(Hududiy boshqarmalar)
-                        a(href="/management/town").item Rejalashtirish(Hududiy bo'limlar)
+                        a.active.item Qo'mita
+                        a(href="/management/region").item Hududiy boshqarmalar
+                        a(href="/management/town").item Hududiy bo'limlar
+                        a(href="/log").item Malumotlar
                         .right.item
-                            a(href="/").ui.inverted.button Logout
+                            a(href="/").ui.inverted.button Chiqish
             .ui.hidden.divider
             form(action='/management/rep' method='post').ui.container.large.equal.width.form.segment
-                h4.ui.dividing.header Create management(Qo'mita)
+                h4.ui.dividing.header Boshqarma(Qo'mita)
                 .fields
                     .seven.wide.field
-                        label Management
-                        input(type='text' placeholder='Management' name="name")
+                        label Boshqarma
+                        input(type='text' placeholder='Boshqarma' name="name")
                     .six.wide.field
                         
                         .two.fields
                             .field 
-                                label User name
-                                input(type='text' placeholder='User name' name="user_name")
+                                label Foydalanuvchi nomi
+                                input(type='text' placeholder='User name' name="Foydalanuvchi nomi")
                             .field
-                                label Password
-                                input(type='text' name='password' placeholder='Password')
-                button.ui.button(type="submit") Create
+                                label Kalit
+                                input(type='text' name='password' placeholder='Kalit')
+                button.ui.button(type="submit") Qo'shish
             .ui.container.large.equal.width.form.segment
                 table.ui.celled.table
                     thead
                         tr
-                            th Name
-                            th User Name
-                            th(style="width: 150px") Delete
+                            th Nomi
+                            th Foydalanuvchi nomi
+                            th(style="width: 150px") O'chirish
                     tbody#replist
             .ui.hidden.divider
+        .ui.modal
+            .header Foydalanuvchi ma'lumotlarini o'zgartirish
+            .nimadir(style="padding: 20px")
+                .ui.container.large.equal.width.form.segment
+                    h4.ui.dividing.header Boshqarma(Qo'mita)
+                    .fields
+                        .seven.wide.field
+                            label Boshqarma nomi
+                            input(type='text' id="modal_name" placeholder='Boshqarma' name="name")
+                        .six.wide.field
+                            .two.fields
+                                .field 
+                                    label Foydalanuvchi nomi
+                                    input(type='text' id="modal_user_name" placeholder='Foydalanuvchi nomi' name="Foydalanuvchi nomi")
+                                .field
+                                    label Kalit
+                                    input(type='text' id="modal_new_password" placeholder='Kalit' name='password')
+            .actions
+                .ui.black.deny.button Yo'q
+                button#btn_update.ui.positive.right.button Ha, O'zartirish
         script(src="/js/main.js")
         script(src="/js/main_super_admin.js")

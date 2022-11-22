@@ -21,14 +21,14 @@ html(lang="en")
                 a.active.item Tekshirish
                 .right.menu
                     .item
-                        a(href="/").ui.button Logout
+                        a(href="/").ui.button Chiqish
         // Sidebar Menu
         .ui.vertical.inverted.sidebar.menu
             a(href='/task/rep').item Rejalashtirish(Qo'mita)
             a(href='/task/town').item Rejalashtirish(Hududiy boshqarmalar)
             a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
             a.active.item Tekshirish
-            a(href="/").item Logout
+            a(href="/").item Chiqish
         .pusher
             .ui.inverted.vertical.masthead.segment.header-color
                 .ui.container
@@ -46,7 +46,7 @@ html(lang="en")
                         a(href='/task/town').item Rejalashtirish(Hududiy bo'limlar)
                         a.active.item Tekshirish
                         .right.item
-                            a(href="/").ui.inverted.button Logout
+                            a(href="/").ui.inverted.button Chiqish
             .ui.hidden.divider
             .ui.container
                 .btn-group
@@ -56,18 +56,18 @@ html(lang="en")
                         a(href='/task/checktwo').ui.button.primary.active Hududiy bo'limlar
                 .ui.hidden.divider
                 .ui.container.large.equal.width.form.segment
-                    h4.ui.dividing.header Work
+                    h4.ui.dividing.header Vazifa
                     .fields
                         .seven.wide.field
                             .fields
                                 .wide.field
-                                    label Management
+                                    label Hududiy Boshqarma
                                     select#region_user.ui.fluid.search.dropdown(name="management_user_id")
                                 .wide.field
-                                    label Department
+                                    label Bo'lim
                                     select#region_town.ui.fluid.search.dropdown(name="user_id")
                         .two.wide.field
-                            label Lifetime
+                            label Holati
                             .two.fields
                                 .field
                                     select#task_status.ui.fluid.search.dropdown(name='date_month')
@@ -76,7 +76,7 @@ html(lang="en")
                                         option(value=3) Tasdiqlangan
                                         option(value=4) Vaqti o'tgan
                     .checking-btn 
-                        button#reportbtn.ui.button Checking
+                        button#reportbtn.ui.button Ko'rish
                 #reportarea
                 .ui.hidden.divider
             script(src="/js/main.js")

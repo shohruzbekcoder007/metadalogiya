@@ -6,6 +6,7 @@ const { cookieJwtAuth } = require('./../middleware/cookieJwtAuth.middleware')
 
 const { User } = require('./../models/user.model')
 const { Group } = require('./../models/group.model')
+const creatr_log = require('../log/create_log')
 
 router.post('/rep', cookieJwtAuth,  async (req, res) => {
     try{
@@ -23,6 +24,8 @@ router.post('/rep', cookieJwtAuth,  async (req, res) => {
                 group: 1
             })
             let new_user = await user.save()
+
+            await creatr_log(req.user._id, `Yangi foydalanuvchi yaratildi(Qo'mita boshqarmasi, name: ${new_user.name})!!!`)
 
             return res.render("main_super_admin", {
                 new_user: _.pick(new_user, ['_id', 'name', "user_name"]),
@@ -64,6 +67,8 @@ router.post('/region', cookieJwtAuth,  async (req, res) => {
                 group: 2
             })
             let new_user = await user.save()
+
+            await creatr_log(req.user._id, `Yangi foydalanuvchi yaratildi(Hududiy boshqarma, name: ${new_user.name})!!!`)
 
             return res.render("main_super_admin1", {
                 new_user: _.pick(new_user, ['_id', 'name', "user_name"]),
@@ -113,6 +118,8 @@ router.post('/town', cookieJwtAuth,  async (req, res) => {
             })
 
             let new_group = await group.save()
+
+            await creatr_log(req.user._id, `Yangi foydalanuvchi yaratildi(Hududiy bo'lim, name: ${new_user.name})!!!`)
 
             return res.render("main_super_admin2", {
                 new_user: _.pick(new_user, ['_id', 'name', "user_name"]),

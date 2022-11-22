@@ -53,9 +53,10 @@ const createTaskList = (data) => {
                 <td>${elem.user_id.name}</td>
                 <td>${elem.user_id.user_name}</td>
                 <td>${elem.text}</td>
+                <td>${elem.date_day || ""}</td>
                 <td>${stringMonth(elem.date_month)}</td>
                 <td>${elem.date_year}</td>
-                <td><button class="ui red button" data-btn="${elem._id}" onclick="deleteFunction(event)">Delete</button></td>
+                <td><button class="ui red button" data-btn="${elem._id}" onclick="deleteFunction(event)">O'chirish</button></td>
             </tr>`)
         })
     }
@@ -84,3 +85,10 @@ const stringMonth = (month_number) => {
 $('#region_user').on('change', function () {
     getTasks(this.value)
 });
+
+const deleteFunction = async (event) => {
+    const del = await axios.delete('/task/delete?id=' + event.target.getAttribute("data-btn"));
+    if(del.data.ok == true){
+        event.target.parentElement.parentElement.classList.add('dbn')
+    }
+}

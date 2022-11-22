@@ -12,12 +12,12 @@ const storage = new GridFsStorage({
         const match = ["application/pdf"]
 
         if(match.indexOf(file.mimetype) === -1){
-            const filename = `${Date.now()}-any-name-${file.originalname}`
+            const filename = `${Date.now()}-any-name`
             return filename
         }
         return {
             bucketName: "files",
-            filename: `${Date.now()}-any-name-${file.originalname}`
+            filename: `${Date.now()}-any-name`
         }
     }
 })

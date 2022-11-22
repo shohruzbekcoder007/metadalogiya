@@ -21,3 +21,13 @@ async function ferferrro(event) {
         window.location.reload();
     }
 }
+
+async function repetition(event){
+    const task_id = event.target.getAttribute('data-id')
+    const res = await axios.put('/file/updatewithtask', {
+        _id: task_id
+    });
+    if(res.data.ok){
+        location.reload()
+    }
+}

@@ -16,6 +16,10 @@ const TaskSchema = new mongoose.Schema({
         enum: [1,2,3,4],
         default: 1
     },
+    date_day: {
+        type: Number,
+        required: true
+    },
     date_month: {
         type: Number,
         required: true

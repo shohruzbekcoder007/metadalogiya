@@ -49,14 +49,14 @@ html(lang="en")
                 a(href="/task/taskfour").item Vaqti o'tgan
                 .right.menu
                     .item
-                        a(href="/").ui.button Logout
+                        a(href="/").ui.button Chiqish
         // Sidebar Menu
         .ui.vertical.inverted.sidebar.menu
             a(href="/task/taskone").item Rejadagi ishlar
             a(href="/task/tasktwo").item Tasdiqlanishi kutilayotgan
             a(href="/task/taskthree").active.item Tasdiqlangan
             a(href="/task/taskfour").item Vaqti o'tgan
-            a(href="/").item Logout
+            a(href="/").item Chiqish
         .pusher
             .ui.inverted.vertical.masthead.segment.header-color
                 .ui.container
@@ -74,23 +74,25 @@ html(lang="en")
                         a(href="/task/taskthree").active.item Tasdiqlangan
                         a(href="/task/taskfour").item Vaqti o'tgan
                         .right.item
-                            a(href="/").ui.inverted.button Logout
+                            a(href="/").ui.inverted.button Chiqish
             .ui.hidden.divider
             .ui.container.large.equal.width.form.segment
                 table.ui.celled.table
                     thead
                         tr
-                            th Task text
-                            th Month
-                            th Year
+                            th Vazifa
+                            th Kun
+                            th Oy
+                            th Yil
                             th Biriktirilgan file
                     tbody
                         - for (let i = 0; i < tasks.length; i++)
                                 tr.positive
                                     td=tasks[i].text
+                                    td=tasks[i].date_day
                                     +month(tasks[i].date_month)
                                     td=tasks[i].date_year
                                     td 
-                                        a(href=`${tasks[i].file_url}` target="_blank")=tasks[i].file_url
+                                        a(href=`${tasks[i].file_url}` target="_blank") biriktirilgan file
             .ui.hidden.divider
     script(src="/js/main_page.js")
